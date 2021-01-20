@@ -1658,7 +1658,7 @@
 
         this._popper = new Popper(referenceElement, this._menu, this._getPopperConfig());
       } // If this is a touch-enabled device we add extra
-      // empty mouseover listeners to the body's immediate children;
+      // productty mouseover listeners to the body's immediate children;
       // only needed because of broken event delegation on iOS
       // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
@@ -1897,7 +1897,7 @@
         if (hideEvent.isDefaultPrevented()) {
           continue;
         } // If this is a touch-enabled device we remove the extra
-        // empty mouseover listeners we added for iOS support
+        // productty mouseover listeners we added for iOS support
 
 
         if ('ontouchstart' in document.documentElement) {
@@ -2747,7 +2747,7 @@
   var DISALLOWED_ATTRIBUTES = ['sanitize', 'whiteList', 'sanitizeFn'];
   var DefaultType$4 = {
     animation: 'boolean',
-    template: 'string',
+    tproductlate: 'string',
     title: '(string|element|function)',
     trigger: 'string',
     delay: '(number|object)',
@@ -2771,7 +2771,7 @@
   };
   var Default$4 = {
     animation: true,
-    template: '<div class="tooltip" role="tooltip">' + '<div class="arrow"></div>' + '<div class="tooltip-inner"></div></div>',
+    tproductlate: '<div class="tooltip" role="tooltip">' + '<div class="arrow"></div>' + '<div class="tooltip-inner"></div></div>',
     trigger: 'hover focus',
     title: '',
     delay: 0,
@@ -2990,7 +2990,7 @@
           }
         });
         $(tip).addClass(ClassName$6.SHOW); // If this is a touch-enabled device we add extra
-        // empty mouseover listeners to the body's immediate children;
+        // productty mouseover listeners to the body's immediate children;
         // only needed because of broken event delegation on iOS
         // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
@@ -3054,7 +3054,7 @@
       }
 
       $(tip).removeClass(ClassName$6.SHOW); // If this is a touch-enabled device we remove the extra
-      // empty mouseover listeners we added for iOS support
+      // productty mouseover listeners we added for iOS support
 
       if ('ontouchstart' in document.documentElement) {
         $(document.body).children().off('mouseover', null, $.noop);
@@ -3090,7 +3090,7 @@
     };
 
     _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $(this.config.tproductlate)[0];
       return this.tip;
     };
 
@@ -3105,7 +3105,7 @@
         // Content is a DOM node or a jQuery
         if (this.config.html) {
           if (!$(content).parent().is($element)) {
-            $element.empty().append(content);
+            $element.productty().append(content);
           }
         } else {
           $element.text($(content).text());
@@ -3315,7 +3315,7 @@
       Util.typeCheckConfig(NAME$6, config, this.constructor.DefaultType);
 
       if (config.sanitize) {
-        config.template = sanitizeHtml(config.template, config.whiteList, config.sanitizeFn);
+        config.tproductlate = sanitizeHtml(config.tproductlate, config.whiteList, config.sanitizeFn);
       }
 
       return config;
@@ -3466,7 +3466,7 @@
     placement: 'right',
     trigger: 'click',
     content: '',
-    template: '<div class="popover" role="tooltip">' + '<div class="arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div></div>'
+    tproductlate: '<div class="popover" role="tooltip">' + '<div class="arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div></div>'
   });
 
   var DefaultType$5 = _objectSpread({}, Tooltip.DefaultType, {
@@ -3521,7 +3521,7 @@
     };
 
     _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $(this.config.tproductlate)[0];
       return this.tip;
     };
 

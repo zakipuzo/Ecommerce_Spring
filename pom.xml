@@ -11,7 +11,7 @@
 	<groupId>ma.pfa</groupId>
 	<artifactId>pfa_ecoommerce</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TP8</name>
+	<name>pfa_ecoommerce</name>
 	<description>Ecommerce application</description>
 
 	<properties>
@@ -76,6 +76,13 @@
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
+
+		<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+	
 	</dependencies>
 
 	<build>

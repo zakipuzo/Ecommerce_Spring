@@ -1,0 +1,53 @@
+<div th:replace="fragments/header.html" ></div>
+<div class="col-12">
+    <!-- Main Content -->
+    <div class="row">
+        <div class="col-12 mt-3 text-center text-uppercase">
+            <h2>Ajouter un produit</h2>
+        </div>
+    </div>
+
+    <main class="row">
+        <div class="col-lg-4 col-md-6 col-sm-8 mx-auto bg-white py-3 mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <form th:action="@{/newregistration}" method="POST" class="form-signin" th:object="${userVo}">
+                        <div align="center" th:if="${param.error}">
+                            <p style="font-size: 20; color: #FF1C19;">Champs incorrectes</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input th:field="*{name}" name="" type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Pseudo</label>
+                            <input th:field="*{username}"type="text" id="username" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input th:field="*{password}" type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-confirm">Confirmer mot de passe</label>
+                            <input type="password" id="password-confirm" name="passwordconf" class="form-control" required>
+                        </div>
+                        <!--<div class="form-group">
+                            <div class="form-check">
+                                <input type="checkbox" id="agree" class="form-check-input" required>
+                                <label for="agree" class="form-check-label ml-2">I agree to Terms and Conditions</label>
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-dark">Inscription</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!-- Main Content -->
+</div>
+
+<div th:replace="fragments/footer.html" ></div>

@@ -42,7 +42,7 @@
 // Edge <= 12 - 13+, Firefox <=18 - 45+, IE 10 - 11, Safari 5.1 - 9+, iOS 6 - 9.1
 // throw exceptions when non-strict code (e.g., ASP.NET 4.5) accesses strict mode
 // arguments.callee.caller (trac-13335). But as of jQuery 3.0 (2016), strict mode should be common
-// enough that all such attempts are guarded in a try block.
+// enough that all such attproductts are guarded in a try block.
     "use strict";
 
     var arr = [];
@@ -1240,7 +1240,7 @@
                     // Build QSA regex
                     // Regex strategy adopted from Diego Perini
                     assert(function( el ) {
-                        // Select is set to empty string on purpose
+                        // Select is set to productty string on purpose
                         // This is to test IE's treatment of not explicitly
                         // setting a boolean content attribute,
                         // since its presence should be enough
@@ -1250,7 +1250,7 @@
                             "<option selected=''></option></select>";
 
                         // Support: IE8, Opera 11-12.16
-                        // Nothing should be selected when empty strings follow ^= or $= or *=
+                        // Nothing should be selected when productty strings follow ^= or $= or *=
                         // The test attribute must be unknown in Opera but "safe" for WinRT
                         // https://msdn.microsoft.com/en-us/library/ie/hh465388.aspx#attribute_section
                         if ( el.querySelectorAll("[msallowcapture^='']").length ) {
@@ -2025,9 +2025,9 @@
                     },
 
                     // Contents
-                    "empty": function( elem ) {
-                        // http://www.w3.org/TR/selectors/#empty-pseudo
-                        // :empty is negated by element (1) or content nodes (text: 3; cdata: 4; entity ref: 5),
+                    "productty": function( elem ) {
+                        // http://www.w3.org/TR/selectors/#productty-pseudo
+                        // :productty is negated by element (1) or content nodes (text: 3; cdata: 4; entity ref: 5),
                         //   but not by others (comment: 8; processing instruction: 7; etc.)
                         // nodeType < 6 works because attributes (2) do not appear as children
                         for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
@@ -2039,7 +2039,7 @@
                     },
 
                     "parent": function( elem ) {
-                        return !Expr.pseudos["empty"]( elem );
+                        return !Expr.pseudos["productty"]( elem );
                     },
 
                     // Element/input types
@@ -2321,7 +2321,7 @@
                     postFinder = setMatcher( postFinder, postSelector );
                 }
                 return markFunction(function( seed, results, context, xml ) {
-                    var temp, i, elem,
+                    var tproduct, i, elem,
                         preMap = [],
                         postMap = [],
                         preexisting = results.length,
@@ -2352,13 +2352,13 @@
 
                     // Apply postFilter
                     if ( postFilter ) {
-                        temp = condense( matcherOut, postMap );
-                        postFilter( temp, [], context, xml );
+                        tproduct = condense( matcherOut, postMap );
+                        postFilter( tproduct, [], context, xml );
 
                         // Un-match failing elements by moving them back to matcherIn
-                        i = temp.length;
+                        i = tproduct.length;
                         while ( i-- ) {
-                            if ( (elem = temp[i]) ) {
+                            if ( (elem = tproduct[i]) ) {
                                 matcherOut[ postMap[i] ] = !(matcherIn[ postMap[i] ] = elem);
                             }
                         }
@@ -2368,24 +2368,24 @@
                         if ( postFinder || preFilter ) {
                             if ( postFinder ) {
                                 // Get the final matcherOut by condensing this intermediate into postFinder contexts
-                                temp = [];
+                                tproduct = [];
                                 i = matcherOut.length;
                                 while ( i-- ) {
                                     if ( (elem = matcherOut[i]) ) {
                                         // Restore matcherIn since elem is not yet a final match
-                                        temp.push( (matcherIn[i] = elem) );
+                                        tproduct.push( (matcherIn[i] = elem) );
                                     }
                                 }
-                                postFinder( null, (matcherOut = []), temp, xml );
+                                postFinder( null, (matcherOut = []), tproduct, xml );
                             }
 
                             // Move matched elements from seed to results to keep them synchronized
                             i = matcherOut.length;
                             while ( i-- ) {
                                 if ( (elem = matcherOut[i]) &&
-                                    (temp = postFinder ? indexOf( seed, elem ) : preMap[i]) > -1 ) {
+                                    (tproduct = postFinder ? indexOf( seed, elem ) : preMap[i]) > -1 ) {
 
-                                    seed[temp] = !(results[temp] = elem);
+                                    seed[tproduct] = !(results[tproduct] = elem);
                                 }
                             }
                         }
@@ -2658,7 +2658,7 @@
                                 rsibling.test( tokens[0].type ) && testContext( context.parentNode ) || context
                             )) ) {
 
-                                // If seed is empty or no tokens remain, we can return early
+                                // If seed is productty or no tokens remain, we can return early
                                 tokens.splice( i, 1 );
                                 selector = seed.length && toSelector( tokens );
                                 if ( !selector ) {
@@ -3151,9 +3151,9 @@
             }
 
             // Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
-            // Treat the template element as a regular one in browsers that
+            // Treat the tproductlate element as a regular one in browsers that
             // don't support it.
-            if ( nodeName( elem, "template" ) ) {
+            if ( nodeName( elem, "tproductlate" ) ) {
                 elem = elem.content || elem;
             }
 
@@ -3285,7 +3285,7 @@
                 // Clean up if we're done firing for good
                 if ( locked ) {
 
-                    // Keep an empty list if we have data for future add calls
+                    // Keep an productty list if we have data for future add calls
                     if ( memory ) {
                         list = [];
 
@@ -3355,7 +3355,7 @@
                 },
 
                 // Remove all callbacks from the list
-                empty: function() {
+                productty: function() {
                     if ( list ) {
                         list = [];
                     }
@@ -3526,7 +3526,7 @@
 
                                         // Support: Promises/A+ section 2.3.3.3.3
                                         // https://promisesaplus.com/#point-59
-                                        // Ignore double-resolution attempts
+                                        // Ignore double-resolution attproductts
                                         if ( depth < maxDepth ) {
                                             return;
                                         }
@@ -3783,7 +3783,7 @@
                     };
                 };
 
-            // Single- and empty arguments are adopted like Promise.resolve
+            // Single- and productty arguments are adopted like Promise.resolve
             if ( remaining <= 1 ) {
                 adoptValue( singleValue, master.done( updateFunc( i ) ).resolve, master.reject,
                     !remaining );
@@ -3912,7 +3912,7 @@
 
 // Multifunctional method to get and set values of a collection
 // The value/s can optionally be executed if it's a function
-    var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
+    var access = function( elems, fn, key, value, chainable, producttyGet, raw ) {
         var i = 0,
             len = elems.length,
             bulk = key == null;
@@ -3921,7 +3921,7 @@
         if ( toType( key ) === "object" ) {
             chainable = true;
             for ( i in key ) {
-                access( elems, fn, i, key[ i ], true, emptyGet, raw );
+                access( elems, fn, i, key[ i ], true, producttyGet, raw );
             }
 
             // Sets one value
@@ -3968,7 +3968,7 @@
             return fn.call( elems );
         }
 
-        return len ? fn( elems[ 0 ], key ) : emptyGet;
+        return len ? fn( elems[ 0 ], key ) : producttyGet;
     };
 
 
@@ -4020,7 +4020,7 @@
 
                 // We can accept data for non-element nodes in modern browsers,
                 // but we should not, see #8335.
-                // Always return an empty object.
+                // Always return an productty object.
                 if ( acceptData( owner ) ) {
 
                     // If it is a node unlikely to be stringify-ed or looped over
@@ -4284,21 +4284,21 @@
             return access( this, function( value ) {
                 var data;
 
-                // The calling jQuery object (element matches) is not empty
+                // The calling jQuery object (element matches) is not productty
                 // (and therefore has an element appears at this[ 0 ]) and the
-                // `value` parameter was not undefined. An empty jQuery object
+                // `value` parameter was not undefined. An productty jQuery object
                 // will result in `undefined` for elem = this[ 0 ] which will
-                // throw an exception if an attempt to read a data cache is made.
+                // throw an exception if an attproductt to read a data cache is made.
                 if ( elem && value === undefined ) {
 
-                    // Attempt to get data from the cache
+                    // Attproductt to get data from the cache
                     // The key will always be camelCased in Data
                     data = dataUser.get( elem, key );
                     if ( data !== undefined ) {
                         return data;
                     }
 
-                    // Attempt to "discover" the data in
+                    // Attproductt to "discover" the data in
                     // HTML5 custom data-* attrs
                     data = dataAttr( elem, key );
                     if ( data !== undefined ) {
@@ -4377,7 +4377,7 @@
             }
 
             if ( !startLength && hooks ) {
-                hooks.empty.fire();
+                hooks.productty.fire();
             }
         },
 
@@ -4385,7 +4385,7 @@
         _queueHooks: function( elem, type ) {
             var key = type + "queueHooks";
             return dataPriv.get( elem, key ) || dataPriv.access( elem, key, {
-                empty: jQuery.Callbacks( "once memory" ).add( function() {
+                productty: jQuery.Callbacks( "once memory" ).add( function() {
                     dataPriv.remove( elem, [ type + "queue", key ] );
                 } )
             } );
@@ -4429,7 +4429,7 @@
         },
 
         // Get a promise resolved when queues of a certain type
-        // are emptied (fx is the type by default)
+        // are producttied (fx is the type by default)
         promise: function( type, obj ) {
             var tmp,
                 count = 1,
@@ -4450,9 +4450,9 @@
 
             while ( i-- ) {
                 tmp = dataPriv.get( elements[ i ], type + "queueHooks" );
-                if ( tmp && tmp.empty ) {
+                if ( tmp && tmp.productty ) {
                     count++;
-                    tmp.empty.add( resolve );
+                    tmp.productty.add( resolve );
                 }
             }
             resolve();
@@ -4576,7 +4576,7 @@
     var defaultDisplayMap = {};
 
     function getDefaultDisplay( elem ) {
-        var temp,
+        var tproduct,
             doc = elem.ownerDocument,
             nodeName = elem.nodeName,
             display = defaultDisplayMap[ nodeName ];
@@ -4585,10 +4585,10 @@
             return display;
         }
 
-        temp = doc.body.appendChild( doc.createElement( nodeName ) );
-        display = jQuery.css( temp, "display" );
+        tproduct = doc.body.appendChild( doc.createElement( nodeName ) );
+        display = jQuery.css( tproduct, "display" );
 
-        temp.parentNode.removeChild( temp );
+        tproduct.parentNode.removeChild( tproduct );
 
         if ( display === "none" ) {
             display = "block";
@@ -4615,7 +4615,7 @@
             if ( show ) {
 
                 // Since we force visibility upon cascade-hidden elements, an immediate (and slow)
-                // check is required in this first loop unless we have a nonempty display value (either
+                // check is required in this first loop unless we have a nonproductty display value (either
                 // inline or about-to-be-restored)
                 if ( display === "none" ) {
                     values[ index ] = dataPriv.get( elem, "display" ) || null;
@@ -4927,7 +4927,7 @@
             origFn = fn;
             fn = function( event ) {
 
-                // Can use an empty set, since event contains the info
+                // Can use an productty set, since event contains the info
                 jQuery().off( event );
                 return origFn.apply( this, arguments );
             };
@@ -5720,7 +5720,7 @@
 
                 // Use the original fragment for the last item
                 // instead of the first because it can end up
-                // being emptied incorrectly in certain situations (#8070).
+                // being producttied incorrectly in certain situations (#8070).
                 for ( ; i < l; i++ ) {
                     node = fragment;
 
@@ -5886,7 +5886,7 @@
             return access( this, function( value ) {
                 return value === undefined ?
                     jQuery.text( this ) :
-                    this.empty().each( function() {
+                    this.productty().each( function() {
                         if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
                             this.textContent = value;
                         }
@@ -5928,7 +5928,7 @@
             } );
         },
 
-        empty: function() {
+        productty: function() {
             var elem,
                 i = 0;
 
@@ -5989,7 +5989,7 @@
                 }
 
                 if ( elem ) {
-                    this.empty().append( value );
+                    this.productty().append( value );
                 }
             }, null, value, arguments.length );
         },
@@ -6237,13 +6237,13 @@
         },
 
         cssPrefixes = [ "Webkit", "Moz", "ms" ],
-        emptyStyle = document.createElement( "div" ).style;
+        producttyStyle = document.createElement( "div" ).style;
 
 // Return a css property mapped to a potentially vendor prefixed property
     function vendorPropName( name ) {
 
         // Shortcut for names that are not vendor prefixed
-        if ( name in emptyStyle ) {
+        if ( name in producttyStyle ) {
             return name;
         }
 
@@ -6253,7 +6253,7 @@
 
         while ( i-- ) {
             name = cssPrefixes[ i ] + capName;
-            if ( name in emptyStyle ) {
+            if ( name in producttyStyle ) {
                 return name;
             }
         }
@@ -6742,8 +6742,8 @@
                     return tween.elem[ tween.prop ];
                 }
 
-                // Passing an empty string as a 3rd parameter to .css will automatically
-                // attempt a parseFloat and fallback to a string if the parse fails.
+                // Passing an productty string as a 3rd parameter to .css will automatically
+                // attproductt a parseFloat and fallback to a string if the parse fails.
                 // Simple values such as "10px" are parsed to Float;
                 // complex values such as "rotate(1rad)" are returned as-is.
                 result = jQuery.css( tween.elem, tween.prop, "" );
@@ -6871,8 +6871,8 @@
             hooks = jQuery._queueHooks( elem, "fx" );
             if ( hooks.unqueued == null ) {
                 hooks.unqueued = 0;
-                oldfire = hooks.empty.fire;
-                hooks.empty.fire = function() {
+                oldfire = hooks.productty.fire;
+                hooks.productty.fire = function() {
                     if ( !hooks.unqueued ) {
                         oldfire();
                     }
@@ -6886,7 +6886,7 @@
                 anim.always( function() {
                     hooks.unqueued--;
                     if ( !jQuery.queue( elem, "fx" ).length ) {
-                        hooks.empty.fire();
+                        hooks.productty.fire();
                     }
                 } );
             } );
@@ -6940,7 +6940,7 @@
                     display = restoreDisplay;
                 } else {
 
-                    // Get nonempty value(s) by temporarily forcing visibility
+                    // Get nonproductty value(s) by tproductorarily forcing visibility
                     showHide( [ elem ], true );
                     restoreDisplay = elem.style.display || restoreDisplay;
                     display = jQuery.css( elem, "display" );
@@ -7085,8 +7085,8 @@
 
                     // Support: Android 2.3 only
                     // Archaic crash bug won't allow us to use `1 - ( 0.5 || 0 )` (#12497)
-                    temp = remaining / animation.duration || 0,
-                    percent = 1 - temp,
+                    tproduct = remaining / animation.duration || 0,
+                    percent = 1 - tproduct,
                     index = 0,
                     length = animation.tweens.length;
 
@@ -7101,7 +7101,7 @@
                     return remaining;
                 }
 
-                // If this was an empty animation, synthesize a final progress notification
+                // If this was an productty animation, synthesize a final progress notification
                 if ( !length ) {
                     deferred.notifyWith( elem, [ animation, 1, 0 ] );
                 }
@@ -7285,7 +7285,7 @@
                 .end().animate( { opacity: to }, speed, easing, callback );
         },
         animate: function( prop, speed, easing, callback ) {
-            var empty = jQuery.isEmptyObject( prop ),
+            var productty = jQuery.isEmptyObject( prop ),
                 optall = jQuery.speed( speed, easing, callback ),
                 doAnimation = function() {
 
@@ -7293,13 +7293,13 @@
                     var anim = Animation( this, jQuery.extend( {}, prop ), optall );
 
                     // Empty animations, or finishing resolves immediately
-                    if ( empty || dataPriv.get( this, "finish" ) ) {
+                    if ( productty || dataPriv.get( this, "finish" ) ) {
                         anim.stop( true );
                     }
                 };
             doAnimation.finish = doAnimation;
 
-            return empty || optall.queue === false ?
+            return productty || optall.queue === false ?
                 this.each( doAnimation ) :
                 this.queue( optall.queue, doAnimation );
         },
@@ -7628,7 +7628,7 @@
 
             if ( !isXML ) {
 
-                // Avoid an infinite loop by temporarily removing this function from the getter
+                // Avoid an infinite loop by tproductorarily removing this function from the getter
                 handle = attrHandle[ lowercaseName ];
                 attrHandle[ lowercaseName ] = ret;
                 ret = getter( elem, name, isXML ) != null ?
@@ -7933,7 +7933,7 @@
                     // If the element has a class name or if we're passed `false`,
                     // then remove the whole classname (if there was one, the above saved it).
                     // Otherwise bring back whatever was previously saved (if anything),
-                    // falling back to the empty string if nothing was stored.
+                    // falling back to the productty string if nothing was stored.
                     if ( this.setAttribute ) {
                         this.setAttribute( "class",
                             className || value === false ?

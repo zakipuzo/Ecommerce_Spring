@@ -351,7 +351,7 @@ summary {
   cursor: pointer;
 }
 
-template {
+tproductlate {
   display: none;
 }
 
@@ -3050,7 +3050,7 @@ input[type="button"].btn-block {
   border-left: 0.3em solid transparent;
 }
 
-.dropdown-toggle:empty::after {
+.dropdown-toggle:productty::after {
   margin-left: 0;
 }
 
@@ -3146,7 +3146,7 @@ input[type="button"].btn-block {
   border-left: 0.3em solid transparent;
 }
 
-.dropup .dropdown-toggle:empty::after {
+.dropup .dropdown-toggle:productty::after {
   margin-left: 0;
 }
 
@@ -3169,7 +3169,7 @@ input[type="button"].btn-block {
   border-left: 0.3em solid;
 }
 
-.dropright .dropdown-toggle:empty::after {
+.dropright .dropdown-toggle:productty::after {
   margin-left: 0;
 }
 
@@ -3206,7 +3206,7 @@ input[type="button"].btn-block {
   border-bottom: 0.3em solid transparent;
 }
 
-.dropleft .dropdown-toggle:empty::after {
+.dropleft .dropdown-toggle:productty::after {
   margin-left: 0;
 }
 
@@ -4948,7 +4948,7 @@ a.badge:hover, a.badge:focus {
   text-decoration: none;
 }
 
-.badge:empty {
+.badge:productty {
   display: none;
 }
 
@@ -6204,7 +6204,7 @@ a.close.disabled {
   border-top-right-radius: calc(0.3rem - 1px);
 }
 
-.popover-header:empty {
+.popover-header:productty {
   display: none;
 }
 
