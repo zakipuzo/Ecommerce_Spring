@@ -31,15 +31,10 @@ public class ProductServiceImpl implements IProductService {
 		productRepository.save(ProductConverter.toBo(product));
 	}
 	@Override
-	public ProductVo getProductById(Long id) {
-		System.out.println(id);
+	public ProductVo getProductById(Long id) { 
 		boolean trouve = productRepository.existsById(id);
 		if (!trouve)
 			return null;
-
-			Product p=productRepository.getOne(id);
-
-			System.out.println(p+"eee");
 		return ProductConverter.toVo(productRepository.getOne(id));
 	}
 	@Override
@@ -53,8 +48,8 @@ public class ProductServiceImpl implements IProductService {
 		return ProductConverter.toListVo(list);
 	}
 	@Override
-	public List<ProductVo> findByName(String fonction) {
-		List<Product> list = productRepository.findByName(fonction);
+	public List<ProductVo> searchProduct(String fonction) {
+		List<Product> list = productRepository.search(fonction);
 		return ProductConverter.toListVo(list);
 	}
 	@Override

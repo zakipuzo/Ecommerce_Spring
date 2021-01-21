@@ -2,11 +2,15 @@ package ma.pfa.springsecurity.presentation;
 
 import java.util.Arrays;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionException;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,15 +63,30 @@ public class LoginController {
 
 	
 	@RequestMapping(value = "/newregistration", method = RequestMethod.POST)
-	public String newregistration(@ModelAttribute("userVo") UserVo user) {
+	public String newregistration(@Valid @ModelAttribute("userVo") UserVo user, BindingResult br) {
 		
-		RoleVo roleClient = userService.getRoleByName("CLIENT"); 
-		 user.setRoles(Arrays.asList(roleClient));
-		 userService.save(user);
-		System.out.println(user);
+		 
+		if(br.hasErrors())  
+        {  
+
+            return "register";  
+		}  
+		else{
+			try{
+				RoleVo roleClient = userService.getRoleByName("CLIENT"); 
+			user.setRoles(Arrays.asList(roleClient));
+			userService.save(user);
+			}
+			catch(TransactionException e){
+				
+			}
+			
+		   System.out.println(user);
+	   
+		   
+		   return "redirect:/";
+		}
 	
-		
-		return "redirect:/";
 	}
 
 	 

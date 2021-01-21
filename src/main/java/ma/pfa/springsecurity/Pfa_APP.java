@@ -51,6 +51,8 @@ public class Pfa_APP implements CommandLineRunner {
 		// *************
 		productService.save(new ProductVo("product1","ezez",  10000d, 5, "url")); */
 
+		
+
 	}
 
 }

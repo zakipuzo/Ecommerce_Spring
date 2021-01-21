@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
  
-import ma.pfa.springsecurity.service.model.Category;
+import ma.pfa.springsecurity.service.model.Order;
 
 /**
  * 
@@ -18,8 +18,7 @@ import ma.pfa.springsecurity.service.model.Category;
  * @Query offre la possibilité d'exécuter des requêtes plus complexes.
  *
  */
-public interface CatRepository extends JpaRepository<Category, Long> {
-	List<Category> findByName(String name);
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
 
 }

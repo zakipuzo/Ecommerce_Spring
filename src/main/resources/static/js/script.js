@@ -38,7 +38,19 @@ $(function() {
 
     setImgLarge();
     setImgSmall();
+ 
+    $("#password-confirm").keyup(function (e) { 
+            if($(this).val()!=$("#password").val()){
+                $("#notmatchedpassword").text("incorrecte");
+            }
+            else{
+                $("#notmatchedpassword").text("");
+            }
+    });
 
+    $("#password").keyup(function (e) { 
+        $("#password-confirm").val("");
+    });
 });
 
 function setImgLarge() {

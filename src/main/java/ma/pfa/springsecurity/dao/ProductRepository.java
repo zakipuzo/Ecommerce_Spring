@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import ma.pfa.springsecurity.service.model.Product;
 
@@ -22,7 +23,8 @@ import ma.pfa.springsecurity.service.model.Product;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	List<Product> findByPrice(Double salary);
 
-	List<Product> findByName(String name);
+	@Query(" SELECT e from Product e where e.name like %:search% ")
+	List<Product> search(@Param("search")String string);
 
 	List<Product> findByPriceAndName(Double salary, String fonction);
 

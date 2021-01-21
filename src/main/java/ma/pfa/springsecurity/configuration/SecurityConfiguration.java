@@ -34,9 +34,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		antMatchers("/rest/**").hasAuthority("ADMIN");
 		
 		http.authorizeRequests().
-		antMatchers("/").permitAll().
-		antMatchers("/product/**").permitAll().
-		antMatchers("/login").permitAll().
+		antMatchers(
+			"/",
+			"/product/**",
+			"/search/**",
+			"/login"
+			).permitAll().  
 		antMatchers("/register").permitAll().
 		antMatchers("/newregistration").permitAll().
 		antMatchers("/welcome").hasAnyAuthority("ADMIN","CLIENT").

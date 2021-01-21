@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ma.pfa.springsecurity.aop.Admin1Profile;
 import ma.pfa.springsecurity.aop.LogExecutionTime;
@@ -44,23 +45,39 @@ public class ProductController {
 
 	@RequestMapping(value = {"/product/{id}"})
 	public String getById(@PathVariable(required = false) Long id, Model m) {
-	 
-		List<ProductVo> list = service.getProducts();
-		System.out.println(list);
-		System.out.println("hhhhh "+id);
+	  
+		//System.out.println("hhhhh "+id);
 		if(id!=null){
-			ProductVo product = service.getProductById(id); 
-			System.out.println(product+"jjj");
-			m.addAttribute("product", product); 
-			return "/product";
-		}
-		ProductVo product =new ProductVo("xxx","fkhhfk",45544d,5,"rr");
-		m.addAttribute("product", product);
+			try{
 
-		System.out.println(product+"aaaaaaaaaaa");
-		return "/product";
+			ProductVo product = service.getProductById(id); 
+			if(product!=null){
+					m.addAttribute("product", product); 
+			return "/product";
+			}
+
+			}catch(Exception e){
+
+			}
+	  
+		}
+		 
+		return "/index";
 	}
 
+	//
+	//SEARCH
+	//
+	@RequestMapping(value = {"/search"})
+	public String search(  Model m) {
+		List<ProductVo> list = service.searchProduct("pro");
+	 
+			m.addAttribute("products", list); 
+		System.out.println(list);
+
+		return "/search";
+	}
+	
 
 	@RequestMapping("/form")
 	public String showform(Model m) {
@@ -122,7 +139,7 @@ public class ProductController {
 	 */
 	@RequestMapping("/product/fonction/{fonction}")
 	public String getByFonction(@PathVariable String fonction, Model m) {
-		List<ProductVo> list = service.findByName(fonction);
+		List<ProductVo> list = service.searchProduct(fonction);
 		m.addAttribute("list", list);
 		return "/admin/product/list";
 	}

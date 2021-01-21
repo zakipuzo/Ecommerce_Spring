@@ -8,7 +8,7 @@ public interface IProductService {
 	ProductVo getProductById(Long id);
 	void delete(Long id);
 	List<ProductVo> findByPrice(Double salary);
-	List<ProductVo> findByName(String designation);
+	List<ProductVo> searchProduct(String string);
 	List<ProductVo> findByPriceAndName(Double salary, String fonction);
 	ProductVo getEmpHavaingMaxSalary();
 	//Pour la pagination
