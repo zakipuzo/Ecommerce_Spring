@@ -16,6 +16,7 @@ public class ProductConverter {
 		vo.setPrice(bo.getPrice());
 		vo.setStock(bo.getStock());
 		vo.setImage(bo.getImage());
+		vo.setCategory(CategoryConverter.toVo(bo.getCategory()));
 		return vo;
 	}
 	public static Product toBo(ProductVo vo) {
@@ -26,6 +27,7 @@ public class ProductConverter {
 		bo.setPrice(vo.getPrice());
 		bo.setStock(vo.getStock());
 		bo.setImage(vo.getImage());
+		bo.setCategory(CategoryConverter.toBo(vo.getCategory()));
 		return bo;
 	}
 	public static List<ProductVo> toListVo(List<Product> listBo) {

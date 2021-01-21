@@ -1,4 +1,35 @@
-<div th:replace="fragments/header.html" ></div>
+<div th:replace="fragments/header.html"></div>
+
+<div class="container">
+    <div class="row text-center" >
+
+        <div class="col-lg-3 ">
+            <a th:href="@{/admin/product/list}">
+            <button class="btn btn-outline-dark" type="button">Products</button>
+
+        </a>
+        </div>
 
 
-<div th:replace="fragments/footer.html" ></div>
+        <div class="col-lg-3">
+
+            <button class="btn btn-outline-dark" type="button">Orders</button>
+
+        </div>
+
+        <div class="col-lg-3">
+
+            <button class="btn btn-outline-dark" type="button">Categories</button>
+
+        </div>
+
+        <div class="col-lg-3">
+
+            <button class="btn btn-outline-dark" type="button">Users</button>
+
+        </div>
+
+
+    </div>
+</div>
+<div th:replace="fragments/footer.html"></div>

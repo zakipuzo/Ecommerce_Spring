@@ -51,6 +51,20 @@ $(function() {
     $("#password").keyup(function (e) { 
         $("#password-confirm").val("");
     });
+  
+        $('table').DataTable({
+ 
+            language: {
+                processing: "Traitement en cours...",
+                search: "Rechercher&nbsp;:",
+                lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
+                info: "Total: _TOTAL_ ",
+
+            }
+        }
+            );
+   
+
 });
 
 function setImgLarge() {

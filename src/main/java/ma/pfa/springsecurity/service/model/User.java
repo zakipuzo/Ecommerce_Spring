@@ -27,16 +27,16 @@ public class User {
 	@GeneratedValue
 	private Long id;
 
-	@Length(min = 3, message = "*Your name must have at least 3 characters")
-	@NotEmpty(message = "*Please provide an  name")
+	@Length(min = 3, message = "*Le nom doit avoir plus de 3 caractères")
+	@NotEmpty(message = "*Ce champ est requis")
 	private String name;
 
-	@Length(min = 5, message = "*Your username must have at least 5 characters")
-	@NotEmpty(message = "*Please provide an user name")
+	@Length(min = 5, message = "*Le nom doit avoir plus de 5 caractères")
+	@NotEmpty(message = "*Ce champ est requis")
 	private String username;
 
-	@Length(min = 5, message = "*Your password must have at least 5 characters")
-	@NotEmpty(message = "*Please provide your password")
+	@Length(min = 5, message = "*Le nom doit avoir plus de 5 caractères")
+	@NotEmpty(message = "*Ce champ est requis")
 	private String password;
 
 	@ManyToMany(cascade = CascadeType.ALL)

@@ -43,4 +43,18 @@ public class Product {
 		this.stock = stock;
 		this.image=image;
 	}
+
+
+	public Product(String name, String description, Double price, int stock, String image, Category category) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.stock = stock;
+		this.image = image;
+		this.category = category;
+	}
+
+
+
 }

@@ -1,5 +1,6 @@
 package ma.pfa.springsecurity.service.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@Entity
-public class Order {
+@Entity(name = "userorder")
+public class Userorder {
 	@Id
 	@GeneratedValue
     private Long id;  
@@ -24,16 +24,21 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "fk_user")
 	private User user;
-    private int status;
+    private int orderstatus;
       
     @OneToMany(mappedBy = "order")
     private List<OrderItem> items = new ArrayList<OrderItem>();
  
-    public Order( User user, int status) {
+    public Userorder( User user, int orderstatus ) {
       
         this.user = user;
-        this.status = status;
+        this.orderstatus = orderstatus;
     }
+
+
+    public Userorder() {
+    }
+
 	 
 
  

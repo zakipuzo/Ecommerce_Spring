@@ -8,22 +8,18 @@ import lombok.Data;
 public class OrderVo {
 	private Long id;
 	private UserVo user;
-	private int status;
-	private LocalDateTime date;
+	private int orderstatus;
 	
 
-	public OrderVo(Long id, UserVo user, int status, LocalDateTime date) {
+	public OrderVo(Long id, UserVo user, int orderstatus) {
 		this.id = id;
 		this.user = user;
-		this.status = status;
-		this.date = date;
 	}
 
-	public OrderVo(UserVo user, int status, LocalDateTime date) {
+	public OrderVo(UserVo user, int orderstatus) {
 	 
 		this.user = user;
-		this.status = status;
-		this.date = date;
+		this.orderstatus = orderstatus;
 	}
 	
 

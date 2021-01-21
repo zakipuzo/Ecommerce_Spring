@@ -3,8 +3,12 @@ package ma.pfa.springsecurity.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
- 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import ma.pfa.springsecurity.service.model.Category;
+import ma.pfa.springsecurity.service.model.Product;
+import ma.pfa.springsecurity.service.model.Userorder;
 
 /**
  * 
@@ -21,5 +25,6 @@ import ma.pfa.springsecurity.service.model.Category;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 	List<Category> findByName(String name);
 
-
+	@Query(" SELECT e from Product e where e.category.id=:id ")
+    List<Product> findByCategory(@Param("id") Long id);
 }

@@ -1,5 +1,8 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+ >
 
 <head>
     <meta charset="UTF-8">
@@ -11,15 +14,21 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css"> 
+  
+    <link href="{% static 'custom.css' %}" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href=".{% static "carma.png" %}" type="image/png"/>
+ 
+    <!-- DataTables https://cdn.datatables.net/ -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
 
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
       <!-- Top Nav -->
-    <nav  th:if="${admin}" class="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav  sec:authorize="hasAuthority('ADMIN')" class="navbar navbar-expand-md bg-dark navbar-dark">
         <a th:href="@{/admin/dashbord}"  class="navbar-brand"><i class="fas fa-tachometer-alt mr-2"></i>Tableau de bord</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -28,21 +37,15 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="@{/admin/products}"><i class="fa fa-envelope mr-2"></i>Produits</a>
+                    <a class="nav-link" href="@{/admin/products}">Produits</a>
                 </li>
                 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
- 
+             
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="@{/admin/products}"><i class="fa fa-envelope mr-2"></i>Bonjour <span th:text="${admin}"></span>></a>
+                    <a class="nav-link" href="@{/admin/dashbord}"></i>Bonjour <span sec:authentication="name"></span></a>
                 </li>
                
  
@@ -51,10 +54,6 @@
     </nav>
  <!-- Top Nav -->
 
- <form th:action="@{/logout}" method="get">
-    <button class="btn btn-md btn-danger btn-block" name="registration"
-        type="Submit">Logout</button>
-</form>
 
 
     <div class="container-fluid">
@@ -68,14 +67,14 @@
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a th:href="@{/}">PFA <span class="h6">E-Commerce</span></a>
+                                    <a th:href="@{/}">Devoir <span class="h6"> Spring E-Commerce</span></a>
                                 </div>
                             </div>
                             <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
-                                <form action="#">
+                                <form th:action="@{/search}">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="search" class="form-control border-dark"
+                                            <input name="search" type="search" class="form-control border-dark"
                                                 placeholder="Rechercher..." required>
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-dark"><i
@@ -96,6 +95,8 @@
                             </div>
                         </div>
 
+                        
+
                         <!-- Nav -->
                         <div class="row">
                             <nav class="navbar navbar-expand-lg navbar-light bg-white col-12">
@@ -106,44 +107,26 @@
                                 <div class="collapse navbar-collapse" id="mainNav">
                                     <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home <span
+                                            <a class="nav-link" th:href="@{/}">Home <span
                                                     class="sr-only">(current)</span></a>
                                         </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="electronics"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Electronics</a>
-                                            <div class="dropdown-menu" aria-labelledby="electronics">
-                                                <a class="dropdown-item" href="category.html">Computers</a>
-                                                <a class="dropdown-item" href="category.html">Mobile Phones</a>
-                                                <a class="dropdown-item" href="category.html">Television Sets</a>
-                                                <a class="dropdown-item" href="category.html">DSLR Cameras</a>
-                                                <a class="dropdown-item" href="category.html">Projectors</a>
-                                            </div>
+                                        <li th:each="category : ${categories}" class="nav-item active">
+                                            <a th:text="${category.name}" class="nav-link" th:href="@{'/category/'+${category.id}}"> </a>
                                         </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="fashion"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Fashion</a>
-                                            <div class="dropdown-menu" aria-labelledby="fashion">
-                                                <a class="dropdown-item" href="category.html">Men's</a>
-                                                <a class="dropdown-item" href="category.html">Women's</a>
-                                                <a class="dropdown-item" href="category.html">Children's</a>
-                                                <a class="dropdown-item" href="category.html">Accessories</a>
-                                                <a class="dropdown-item" href="category.html">Footwear</a>
-                                            </div>
+                                        <li sec:authorize="isAuthenticated()" class="nav-item active">
+                                            <a class="nav-link" th:href="@{/logout}">Se déconnecter </a>
                                         </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="books"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Books</a>
-                                            <div class="dropdown-menu" aria-labelledby="books">
-                                                <a class="dropdown-item" href="category.html">Adventure</a>
-                                                <a class="dropdown-item" href="category.html">Horror</a>
-                                                <a class="dropdown-item" href="category.html">Romantic</a>
-                                                <a class="dropdown-item" href="category.html">Children's</a>
-                                                <a class="dropdown-item" href="category.html">Non-Fiction</a>
-                                            </div>
+                                        <li sec:authorize="isAnonymous()" class="nav-item active">
+                                            <a class="nav-link" th:href="@{/register}">S'inscrire </a>
+                                        </li>
+                                        <li sec:authorize="isAnonymous()" class="nav-item active">
+                                            <a class="nav-link" th:href="@{/login}">Se connecter </a>
+                                        </li>
+                                      
+                                        
+                                        <li>
+                                            
+                                            
                                         </li>
                                     </ul>
                                 </div>

@@ -4,8 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne; 
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,11 +15,11 @@ import lombok.NoArgsConstructor;
 public class OrderItem {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Long id;
 	
 	@ManyToOne
     @JoinColumn(name = "fk_order")
-    private Order order;
+    private Userorder order;
 	 
 	@ManyToOne
     @JoinColumn(name = "fk_product")
@@ -30,7 +29,7 @@ public class OrderItem {
 
 	 
 
-	public OrderItem(  Order order, Product product, int quantity) {
+	public OrderItem(  Userorder order, Product product, int quantity) {
 	 
 		this.order = order;
 		this.product = product;

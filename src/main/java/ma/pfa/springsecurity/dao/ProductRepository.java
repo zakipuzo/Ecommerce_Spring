@@ -30,4 +30,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	@Query(" SELECT e from Product e where e.price=(select MAX(price) as price FROM Product)")
 	Product getEmpHavaingMaxSalary();
+
+	@Query(nativeQuery = true, value = " SELECT * from product LIMIT 8")
+	List<Product> lastest();
 }

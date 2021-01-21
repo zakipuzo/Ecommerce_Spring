@@ -1,6 +1,7 @@
 package ma.pfa.springsecurity.presentation;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ma.pfa.springsecurity.domaine.CategoryVo;
 import ma.pfa.springsecurity.domaine.RoleVo;
 import ma.pfa.springsecurity.domaine.UserVo;
+import ma.pfa.springsecurity.service.ICategoryService;
 import ma.pfa.springsecurity.service.IUserService;
 
 @Controller
@@ -26,30 +29,23 @@ public class LoginController {
 	@Autowired
 	private IUserService userService;
 
+	@Autowired
+	private ICategoryService service;
+
+
 	@RequestMapping(value = {  "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
+		
+		List<CategoryVo> list = service.getCategories(); 
+
+		modelAndView.addObject("categories", list);
+
+	
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
 
-
-
-	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
-	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("index");
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	 
-		if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
-			modelAndView.addObject("admin", auth.getName());
-		}
-
-		return modelAndView;
-	}
-
-	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(Model m) {
 		
@@ -57,6 +53,11 @@ public class LoginController {
 		m.addAttribute("userVo", new UserVo());
 		ModelAndView modelAndView = new ModelAndView(); 
 		modelAndView.setViewName("register");
+		List<CategoryVo> list = service.getCategories(); 
+
+		modelAndView.addObject("categories", list);
+
+	
 		return modelAndView;
 	}
 
@@ -78,7 +79,7 @@ public class LoginController {
 			userService.save(user);
 			}
 			catch(TransactionException e){
-				
+
 			}
 			
 		   System.out.println(user);

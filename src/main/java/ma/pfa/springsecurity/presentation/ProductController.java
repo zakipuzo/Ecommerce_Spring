@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ma.pfa.springsecurity.aop.Admin1Profile;
 import ma.pfa.springsecurity.aop.LogExecutionTime;
 import ma.pfa.springsecurity.aop.Tracabilite;
+import ma.pfa.springsecurity.domaine.CategoryVo;
 import ma.pfa.springsecurity.domaine.ProductVo;
+import ma.pfa.springsecurity.service.ICategoryService;
 import ma.pfa.springsecurity.service.IProductService;
 import ma.pfa.springsecurity.service.exception.BusinessException;
 
@@ -31,6 +34,10 @@ public class ProductController {
 
 	@Autowired
 	private IProductService service;
+
+	@Autowired
+	private ICategoryService catservice;
+
 
 	@ExceptionHandler(value = BusinessException.class)
 	public String exception(Model m) {
@@ -49,6 +56,10 @@ public class ProductController {
 		//System.out.println("hhhhh "+id);
 		if(id!=null){
 			try{
+
+				List<CategoryVo> lst = catservice.getCategories(); 
+
+		m.addAttribute("categories", lst);
 
 			ProductVo product = service.getProductById(id); 
 			if(product!=null){
@@ -69,9 +80,16 @@ public class ProductController {
 	//SEARCH
 	//
 	@RequestMapping(value = {"/search"})
-	public String search(  Model m) {
-		List<ProductVo> list = service.searchProduct("pro");
-	 
+	public String search(@RequestParam String search,  Model m) {
+		
+
+		List<ProductVo> list = service.searchProduct(search);
+		List<CategoryVo> lst = catservice.getCategories(); 
+
+		m.addAttribute("categories", lst);
+
+	
+		m.addAttribute("search", search); 
 			m.addAttribute("products", list); 
 		System.out.println(list);
 
@@ -79,13 +97,21 @@ public class ProductController {
 	}
 	
 
-	@RequestMapping("/form")
+	@RequestMapping("/admin/product/edit")
 	public String showform(Model m) {
+
+		List<CategoryVo> lst = catservice.getCategories(); 
+
+		m.addAttribute("categories", lst);
+
+		List<CategoryVo> list = catservice.getCategories(); 
+		m.addAttribute("categories", list);
+
 		m.addAttribute("productVo", new ProductVo());
 		return "/admin/product/edit";
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/product/save", method = RequestMethod.POST)
 	@LogExecutionTime
 	@Tracabilite
 	public String save(@ModelAttribute("productVo") ProductVo product) {
@@ -93,33 +119,41 @@ public class ProductController {
 		return "redirect:/admin/product/list";
 	}
 
-	@RequestMapping("/list")
+	@RequestMapping("/admin/product/list")
 	@LogExecutionTime
 	@Tracabilite
 	public String viewproduct(Model m) {
+
+		List<CategoryVo> lst = catservice.getCategories(); 
+
+		m.addAttribute("categories", lst);
+
 		List<ProductVo> list = service.getProducts();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		m.addAttribute("userName", "Welcome " + auth.getName());
+	
 		m.addAttribute("list", list);
 		return "/admin/product/list";
 	}
 
-	@RequestMapping(value = "/edit/{id}")
+	@RequestMapping(value = "/admin/product/edit/{id}")
 	@Tracabilite
 	public String edit(@PathVariable Long id, Model m) {
+		List<CategoryVo> list = catservice.getCategories(); 
+		m.addAttribute("categories", list);
+
 		ProductVo product = service.getProductById(id);
 		m.addAttribute("productVo", product);
 		return "/admin/product/edit";
 	}
+
 	@Tracabilite
-	@RequestMapping(value = "/editsave", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/product/editsave", method = RequestMethod.POST)
 	public String editsave(@ModelAttribute("productVo") ProductVo product) {
 		service.save(product);
 		return "redirect:/admin/product/view";
 	}
 	@Tracabilite
 	@Admin1Profile
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/product/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable Long id) {
 		service.delete(id);
 		return "redirect:/admin/product/list";

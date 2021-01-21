@@ -1,18 +1,17 @@
 package ma.pfa.springsecurity.service;
 import java.util.List;
 
-import ma.pfa.springsecurity.domaine.CatVo;
+import ma.pfa.springsecurity.domaine.OrderVo;
 import ma.pfa.springsecurity.service.model.User;
 public interface IOrderService {
 
-	List<CatVo> getOrders();
+	List<OrderVo> getOrders();
 	
-	void save(CatVo product);
-	CatVo getOrderById(Long id);
+	void save(OrderVo order);
+	OrderVo getOrderById(Long id);
 	void delete(Long id);
-	List<CatVo> findByUser(User user);
-	//Pour la pagination
-	List<CatVo> findAll(int pageId, int size);
+ 
+	List<OrderVo> findAll(int pageId, int size);
 	//pour le tri
-	List<CatVo> sortBy(String fieldName);
+	List<OrderVo> sortBy(String fieldName);
 }

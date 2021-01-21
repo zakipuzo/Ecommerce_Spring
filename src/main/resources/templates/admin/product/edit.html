@@ -1,30 +1,21 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header.html"></div>
 
-<head>
-	<title>Formation Spring Boot : Services Web</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
 
-<body>
 	<div class="container">
 		<form th:action="@{/admin/product/save}" method="POST" class="form-signin" th:object="${productVo}">
-			<h3 class="form-signin-heading" th:text="Nouveau"></h3>
+			<h3 class="form-signin-heading"> Nouveau Produit</h3>
 			<br/>
-			 
+			<input th:field="*{id}" type="hidden" id="id" name="id"  th:placeholder="Name"	class="form-control"/> <br/>
 			<input th:field="*{name}" type="text" id="name" name="name"  th:placeholder="Name"	class="form-control"/> <br/> 
-			<input th:field="*{fonction}" type="text" id="fonction" name="fonction" th:placeholder="Fonction" class="form-control" /> <br /> 
-			<input th:field="*{salary}" type="text" id="salary" name="salary" th:placeholder="Salary" class="form-control" /> <br /> 
-				
+			<input th:field="*{price}" type="text" id="fonction" name="fonction" th:placeholder="Fonction" class="form-control" /> <br /> 
+			<select th:field="*{category.id}">
+<option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+			</select>
 			<div align="center" th:if="${param.error}">
 				<p style="font-size: 20; color: #FF1C19;">blallalallala</p>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Ajouter"></button>
 		</form>
 	</div>
-</body>
-</html>
+	<div th:replace="fragments/footer.html"></div>
+

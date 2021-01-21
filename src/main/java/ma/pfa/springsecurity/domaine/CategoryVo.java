@@ -1,20 +1,20 @@
 package ma.pfa.springsecurity.domaine;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class CatVo {
+@NoArgsConstructor
+public class CategoryVo {
 	private Long id;
 	private String name; 
-	public CatVo() {
-		super();
-	}
-	public CatVo(Long id, String name) {
+	 
+	public CategoryVo(Long id, String name) {
 		this(name);
 		this.id = id;
 	}
 	
-	public CatVo(String name) {
+	public CategoryVo(String name) {
 		super();
 		this.name = name; 
 	}

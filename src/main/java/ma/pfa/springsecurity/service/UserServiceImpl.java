@@ -14,8 +14,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ma.pfa.springsecurity.aop.LogExecutionTime;
+import ma.pfa.springsecurity.dao.CategoryRepository;
+import ma.pfa.springsecurity.dao.OrderItemRepository;
 import ma.pfa.springsecurity.dao.ProductRepository;
 import ma.pfa.springsecurity.dao.RoleRepository;
+import ma.pfa.springsecurity.dao.UserOrderRepository;
 import ma.pfa.springsecurity.dao.UserRepository;
 import ma.pfa.springsecurity.domaine.RoleConverter;
 import ma.pfa.springsecurity.domaine.RoleVo;
@@ -31,6 +34,12 @@ public class UserServiceImpl implements IUserService {
 	private UserRepository userRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private UserOrderRepository userOrderRepository;
+	@Autowired
+	private OrderItemRepository orderItemRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -104,5 +113,9 @@ public class UserServiceImpl implements IUserService {
 		userRepository.deleteAll();
 		roleRepository.deleteAll();
 		productRepository.deleteAll();
+		categoryRepository.deleteAll();
+		orderItemRepository.deleteAll();
+		userOrderRepository.deleteAll();
+		
 	}
 }

@@ -70,4 +70,10 @@ public class ProductServiceImpl implements IProductService {
 	public List<ProductVo> sortBy(String fieldName) {
 		return ProductConverter.toListVo(productRepository.findAll(Sort.by(fieldName)));
 	}
+
+	@Override
+	public List<ProductVo> getLastestProducts() {
+		 
+		return ProductConverter.toListVo(productRepository.lastest());
+	}
 }

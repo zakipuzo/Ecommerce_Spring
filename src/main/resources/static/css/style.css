@@ -365,6 +365,9 @@ table td img {
     max-height: 80px;
 }
 
+.dataTables_wrapper{
+    width: 100%;
+}
 @media (max-width: 767.98px) {
 
     .sidebar {

@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ma.pfa.springsecurity.aop.Admin1Profile;
 import ma.pfa.springsecurity.dao.CategoryRepository;
-import ma.pfa.springsecurity.domaine.CatConverter;
-import ma.pfa.springsecurity.domaine.CatVo;
+import ma.pfa.springsecurity.domaine.CategoryConverter;
+import ma.pfa.springsecurity.domaine.CategoryVo;
+import ma.pfa.springsecurity.domaine.ProductConverter;
+import ma.pfa.springsecurity.domaine.ProductVo;
 import ma.pfa.springsecurity.service.model.Category;
 
 @Service
@@ -21,40 +23,53 @@ import ma.pfa.springsecurity.service.model.Category;
 public class CategoryServiceImpl implements ICategoryService {
 	@Autowired
 	private CategoryRepository CatRepository;
+
 	@Override
-	public List<CatVo> getCategories() {
+	public List<CategoryVo> getCategories() {
 		List<Category> list = CatRepository.findAll();
-		return CatConverter.toListVo(list);
+		return CategoryConverter.toListVo(list);
 	}
+
 	@Override
-	public void save(CatVo Category) {
-		CatRepository.save(CatConverter.toBo(Category));
+	public void save(CategoryVo Category) {
+		CatRepository.save(CategoryConverter.toBo(Category));
 	}
+
 	@Override
-	public CatVo getCatById(Long id) {
+	public CategoryVo getCategoryById(Long id) {
 		boolean trouve = CatRepository.existsById(id);
 		if (!trouve)
 			return null;
-		return CatConverter.toVo(CatRepository.getOne(id));
+		return CategoryConverter.toVo(CatRepository.getOne(id));
 	}
+
 	@Override
 	@Admin1Profile
 	public void delete(Long id) {
 		CatRepository.deleteById(id);
 	}
+
 	@Override
-	public List<CatVo> findByName(String name) {
+	public List<CategoryVo> findByName(String name) {
 		List<Category> list = CatRepository.findByName(name);
-		return CatConverter.toListVo(list);
-	} 
-	@Override
-	public List<CatVo> findAll(int pageId, int size) {
-		Page<Category> result = CatRepository.findAll(PageRequest.of(pageId, size, Direction.ASC, "name"));
-		return CatConverter.toListVo(result.getContent());
+		return CategoryConverter.toListVo(list);
 	}
+
 	@Override
-	public List<CatVo> sortBy(String fieldName) {
-		return CatConverter.toListVo(CatRepository.findAll(Sort.by(fieldName)));
+	public List<CategoryVo> findAll(int pageId, int size) {
+		Page<Category> result = CatRepository.findAll(PageRequest.of(pageId, size, Direction.ASC, "name"));
+		return CategoryConverter.toListVo(result.getContent());
+	}
+
+	@Override
+	public List<CategoryVo> sortBy(String fieldName) {
+		return CategoryConverter.toListVo(CatRepository.findAll(Sort.by(fieldName)));
+	}
+
+	@Override
+	public List<ProductVo> searchByCategory(Long id) {
+		return ProductConverter.toListVo(CatRepository.findByCategory(id));
+
 	}
  
 }

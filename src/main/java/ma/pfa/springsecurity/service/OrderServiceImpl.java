@@ -11,50 +11,48 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ma.pfa.springsecurity.aop.Admin1Profile;
-import ma.pfa.springsecurity.dao.OrderRepository;
-import ma.pfa.springsecurity.domaine.CatConverter;
-import ma.pfa.springsecurity.domaine.CatVo;
-import ma.pfa.springsecurity.service.model.Order;
+import ma.pfa.springsecurity.dao.UserOrderRepository;
+import ma.pfa.springsecurity.domaine.OrderConverter;
+import ma.pfa.springsecurity.domaine.OrderVo;
+import ma.pfa.springsecurity.domaine.UserVo;
+import ma.pfa.springsecurity.service.model.Userorder;
+import ma.pfa.springsecurity.service.model.User;
 
 @Service
 @Transactional
 public class OrderServiceImpl implements IOrderService {
 	@Autowired
-	private OrderRepository OrderRepository;
+	private UserOrderRepository OrderRepository;
 	@Override
-	public List<CatVo> getOrders() {
-		List<Order> list = OrderRepository.findAll();
-		return CatConverter.toListVo(list);
+	public List<OrderVo> getOrders() {
+		List<Userorder> list = OrderRepository.findAll();
+		return OrderConverter.toListVo(list);
 	}
 	@Override
-	public void save(CatVo Order) {
-		OrderRepository.save(CatConverter.toBo(Order));
+	public void save(OrderVo Order) {
+		OrderRepository.save(OrderConverter.toBo(Order));
 	}
 	@Override
-	public CatVo getCatById(Long id) {
+	public OrderVo getOrderById(Long id) {
 		boolean trouve = OrderRepository.existsById(id);
 		if (!trouve)
 			return null;
-		return CatConverter.toVo(OrderRepository.getOne(id));
+		return OrderConverter.toVo(OrderRepository.getOne(id));
 	}
 	@Override
 	@Admin1Profile
 	public void delete(Long id) {
 		OrderRepository.deleteById(id);
 	}
+ 
 	@Override
-	public List<CatVo> findByName(String name) {
-		List<Order> list = OrderRepository.findByName(name);
-		return CatConverter.toListVo(list);
-	} 
-	@Override
-	public List<CatVo> findAll(int pageId, int size) {
-		Page<Order> result = OrderRepository.findAll(PageRequest.of(pageId, size, Direction.ASC, "name"));
-		return CatConverter.toListVo(result.getContent());
+	public List<OrderVo> findAll(int pageId, int size) {
+		Page<Userorder> result = OrderRepository.findAll(PageRequest.of(pageId, size, Direction.ASC, "name"));
+		return OrderConverter.toListVo(result.getContent());
 	}
 	@Override
-	public List<CatVo> sortBy(String fieldName) {
-		return CatConverter.toListVo(OrderRepository.findAll(Sort.by(fieldName)));
+	public List<OrderVo> sortBy(String fieldName) {
+		return OrderConverter.toListVo(OrderRepository.findAll(Sort.by(fieldName)));
 	}
  
 }

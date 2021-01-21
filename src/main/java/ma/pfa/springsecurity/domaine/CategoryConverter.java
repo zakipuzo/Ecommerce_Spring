@@ -5,23 +5,23 @@ import java.util.List;
 
 import ma.pfa.springsecurity.service.model.Category;
 
-public class CatConverter {
-	public static CatVo toVo(Category bo) {
+public class CategoryConverter {
+	public static CategoryVo toVo(Category bo) {
 		if (bo == null || bo.getId() ==null)
 			return null;
-		CatVo vo = new CatVo();
+		CategoryVo vo = new CategoryVo();
 		vo.setId(bo.getId());
 		vo.setName(bo.getName()); 
 		return vo;
 	}
-	public static Category toBo(CatVo vo) {
+	public static Category toBo(CategoryVo vo) {
 		Category bo = new Category();
 		bo.setId(vo.getId());
 		bo.setName(vo.getName()); 
 		return bo;
 	}
-	public static List<CatVo> toListVo(List<Category> listBo) {
-		List<CatVo> listVo = new ArrayList<>();
+	public static List<CategoryVo> toListVo(List<Category> listBo) {
+		List<CategoryVo> listVo = new ArrayList<>();
 		for (Category Category : listBo) {
 			listVo.add(toVo(Category));
 		}
